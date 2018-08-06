@@ -1,0 +1,82 @@
+<!--
+  Generated template for the AboutPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Sobre las fiestas</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list class="card">
+
+    <ion-item (click)="toggleGroup(0)">
+      <ion-icon name="information-circle" item-start></ion-icon>
+      Historia
+    </ion-item>
+
+    <ion-item class="item-accordion" *ngIf="isGroupShown(0)">
+      <span class="textoInfo">
+        Suelen comenzar el último fin de semana de agosto y acaban el primer fin de semana de septiembre. Se vinculan a la tradición 
+        de las fiestas de la cosecha. La advocación a la Virgen de la Oliva es muy antigua: al menos desde 1245 la ermita de su nombre 
+        tenía dotación de tierras en nuestra villa.<br> 
+        Durante los días que duran las Fiestas Mayores, además de las celebraciones religiosas, 
+        existe una gran variedad de actos: encierro de reses bravas y feria taurina, actividades deportivas, verbenas populares, 
+        juegos para niños y entretenimientos para la Tercera Edad.
+        <br/>
+        <br/>
+        <i>Fuente:
+          <ion-item style="color:#0645AD" href="http://bit.ly/2LUlvDd" (click)="openLink('http://bit.ly/2LUlvDd')">http://bit.ly/2LUlvDd</ion-item>
+        </i>
+      </span>
+    </ion-item>
+    <ion-item (click)="toggleGroup(1)">
+      <ion-icon name="information-circle" item-start></ion-icon>
+      Este año...
+    </ion-item>
+    <ion-item class="item-accordion" *ngIf="isGroupShown(1)">
+      <span class="textoInfo">
+        <br/> En 2018 se celebrarán del 1 al 9 de septiembre. La advocación a la Virgen de la Oliva es muy antigua: 
+        al menos desde 1245 la ermita de su nombre tenía dotación de tierras en nuestra villa. 
+        <br>Durante los días que duran las Fiestas Mayores, además de las celebraciones religiosas, 
+        existe una gran variedad de actos: encierro de reses bravas y feria taurina, actividades deportivas, verbenas populares, 
+        juegos para niños y entretenimientos para la Tercera Edad. <br>Todo ello está rodeado de un ambiente excepcional y 
+        de la tradicional hospitalidad de los ejeanos.
+        <br/>
+        <br/>
+        <i>Fuente:
+          <ion-item style="color:#0645AD" href="http://bit.ly/2ObTmEg" (click)="openLink('http://bit.ly/2ObTmEg')">http://bit.ly/2ObTmEg</ion-item>
+        </i>
+      </span>
+    </ion-item>
+    <ion-item (click)="toggleGroup(2)">
+      <ion-icon name="information-circle" item-start></ion-icon>
+      Interpeñas Ejea
+    </ion-item>
+    <ion-item class="item-accordion" *ngIf="isGroupShown(2)">
+      <span class="textoInfo">
+        <br/> Interpeñas Ejea es una asociación que creada para promover actividades festivas, de ocio y culturales, 
+        entre los jóvenes de nuestra localidad.
+        <br/>Durante las fiestas (no solo en las de la Virgen de la Oliva), interpeñas Ejea organiza diferentes eventos de todo tipo, con
+        el fin de promover actividades entre los jóvenes. Siendo socio de interpeñas puedes beneficiarte de numerosos descuentos en varios
+        establecimientos y eventos de todo tipo que se realizan en Ejea de los Caballeros.
+        <br/>
+        <br/>
+        <i>Fuente:
+          <ion-item style="color:#0645AD" href="http://www.interpenasejea.com/" (click)="openLink('http://www.interpenasejea.com/')">http://www.interpenasejea.com/</ion-item>
+        </i>
+      </span>
+    </ion-item>
+
+
+  </ion-list>
+</ion-content>
