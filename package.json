@@ -31,6 +31,7 @@
     "call-number": "^1.0.1",
     "cordova-plugin-datepicker": "^0.9.3",
     "cordova-plugin-inappbrowser": "^3.0.0",
+    "cordova-plugin-ionic": "^5.0.5",
     "cordova-sqlite-storage": "^2.3.3",
     "ionic-angular": "3.9.2",
     "ionicons": "3.0.0",
@@ -49,7 +50,12 @@
       "mx.ferreyra.callnumber": {},
       "cordova-plugin-inappbrowser": {},
       "cordova-sqlite-storage": {},
-      "cordova-plugin-datepicker": {}
+      "cordova-plugin-datepicker": {},
+      "cordova-plugin-ionic": {
+        "APP_ID": "991dda51",
+        "CHANNEL_NAME": "Master",
+        "UPDATE_METHOD": "background"
+      }
     }
   }
 }
