@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Platform } from 'ionic-angular';
+import { AdMobPro } from '@ionic-native/admob-pro';
 import { ListPage } from '../list/list';
 import { FavsPage } from '../favs/favs';
 import { PhonesPage } from '../phones/phones';
@@ -24,7 +25,7 @@ export class HomePage {
 
   
 
-  constructor(public navCtrl: NavController, public events: EventsService) {
+  constructor(public navCtrl: NavController, public events: EventsService, private admob: AdMobPro, private platform: Platform) {
     //this.rightNowEvents = events.allEvents
     events.allEvents.forEach(element => {
 
@@ -41,7 +42,26 @@ export class HomePage {
       }
       this.nextEvents = this.nextEvents.slice(0, 5);
     });
+    let TIME_IN_MS = 2000;
+    setTimeout( () => {
+      this.admob.onAdDismiss()
+      .subscribe(() => { console.log('User dismissed ad'); });
+      let adId;
+      if(this.platform.is('android')) {
+        adId = 'ca-app-pub-3240812764495845/4978287685';
+      } else if (this.platform.is('ios')) {
+        adId = 'ca-app-pub-3240812764495845/9464327607';
+      }
+      this.admob.createBanner({
+        adId: adId,
+        position: this.admob.AD_POSITION.BOTTOM_CENTER,
+        isTesting: true
+      });
+      this.admob.showBanner(this.admob.AD_POSITION.BOTTOM_CENTER);
+    }, TIME_IN_MS);
+    
   }
+
 
   customTrackBy(index: number, obj: any): any {
     return index;

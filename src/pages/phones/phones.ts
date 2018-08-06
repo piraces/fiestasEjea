@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { CallNumber } from '@ionic-native/call-number';
+
 
 /**
  * Generated class for the PhonesPage page.
@@ -47,7 +48,7 @@ export class PhonesPage {
   ]
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private callNumber: CallNumber, private alertCtrl: AlertController) {
-
+    
   }
 
   ionViewDidLoad() {
@@ -60,6 +61,7 @@ export class PhonesPage {
       console.log("Success launching dialer. Phone: " + phone);
     })
     .catch(err => {
+      console.log(err);
       let alert = this.alertCtrl.create({
         title: 'Error al llamar, por favor intente llamar manualmente...',
         buttons: ['Cancelar']

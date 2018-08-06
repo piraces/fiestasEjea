@@ -19,6 +19,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { IonicStorageModule } from '@ionic/storage';
 import { DatePicker } from '@ionic-native/date-picker';
+import { AdMobPro } from '@ionic-native/admob-pro';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { DatePicker } from '@ionic-native/date-picker';
     StatusBar,
     SplashScreen,
     CallNumber,
+    AdMobPro,
     InAppBrowser,
     EventsService,
     DatePicker,
