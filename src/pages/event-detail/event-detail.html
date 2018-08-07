@@ -16,10 +16,10 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
     <ion-card>
 
-        <img src="{{mainImage}}">
+        <!-- <img src="{{mainImage}}"> -->
         <ion-fab right top>
           <button *ngIf="starred" ion-fab (click)="unstarEvent()">
             <ion-icon name="star"></ion-icon>
@@ -29,31 +29,31 @@
             </button>
         </ion-fab>
       
-        <ion-item>
+        <ion-item text-wrap>
           <ion-icon name="{{event.icon}}" item-start large></ion-icon>
           <h2>{{event.title}}</h2>
           <p>{{event.description}}</p>
         </ion-item>
       
-        <ion-item>
+        <ion-item text-wrap>
           <ion-icon name="body" item-start large ></ion-icon>
           <h2>Artista(s):</h2>
           <p>{{event.artists}}</p>
         </ion-item>
 
-        <ion-item>
+        <ion-item text-wrap>
           <ion-icon name="contacts" item-start large ></ion-icon>
           <h2>Colaboran:</h2>
           <p>{{event.colaborators}}</p>
         </ion-item>
       
-        <ion-item>
+        <ion-item text-wrap>
             <ion-icon name="pin" item-start large ></ion-icon>
             <h2>Lugar:</h2>
             <p>{{event.place}}</p>
           </ion-item>
 
-        <ion-item>
+        <ion-item text-wrap>
           <span item-start>{{event.start.toLocaleDateString('es-ES', { weekday: 'short', month: 'short', day: 'numeric' })}} - {{event.start.toTimeString().split(' ')[0].substring(0, 5)}}</span>
           <span *ngIf="event.end" item-start>➡ {{event.end.toLocaleDateString('es-ES', { weekday: 'short', month: 'short', day: 'numeric' })}} - {{event.end.toTimeString().split(' ')[0].substring(0, 5)}}</span>
         </ion-item>

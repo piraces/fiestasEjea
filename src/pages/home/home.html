@@ -7,7 +7,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <ion-card>
     <ion-card-header>
       <ion-icon name="time" item-start></ion-icon> 
@@ -20,7 +20,7 @@
         {{item.title}}<br>
         <ion-badge color="danger" item-buttom>{{item.start.toTimeString().split(' ')[0].substring(0, 5)}}</ion-badge>
       </button>
-      <ion-item *ngIf="rightNowEvents.length == 0">
+      <ion-item *ngIf="rightNowEvents.length == 0" text-wrap>
         No hay ningún evento en estos momentos
       </ion-item>
   
@@ -39,7 +39,7 @@
           {{item.title}}<br>
           <ion-badge color="light" item-buttom>{{item.start.toLocaleDateString('es-ES', { weekday: 'short', month: 'short', day: 'numeric' })}} - {{item.start.toTimeString().split(' ')[0].substring(0, 5)}}</ion-badge>
         </button>
-        <ion-item *ngIf="nextEvents.length == 0">
+        <ion-item *ngIf="nextEvents.length == 0" text-wrap>
           No hay ningún evento próximamente
         </ion-item>
     
