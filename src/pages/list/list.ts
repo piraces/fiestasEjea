@@ -19,6 +19,7 @@ export class ListPage {
   selectedText: string = "";
 
   lastFilter: any;
+  starred: boolean;
 
   showEvents: any = [];
   allEvents: any = [];
@@ -82,7 +83,12 @@ export class ListPage {
     this.showEvents = [];
     eventsFiltered.forEach(element => {
       if (element.type == category) {
-        this.showEvents.push({ starred: this.isStarred(element), mainImage: this.getMainImage(element), event: element });
+        this.isStarred(element).then(result => {
+          if(result != null){
+            result = true;
+          }
+          this.showEvents.push({ starred: result, mainImage: this.getMainImage(element), event: element });
+        });
       }
     });
 
@@ -114,7 +120,12 @@ export class ListPage {
     this.showEvents = [];
     eventsFiltered.forEach(element => {
       if (element.start.getDate() == myDate.day && element.start.getMonth() == myDate.month - 1) {
-        this.showEvents.push({ starred: this.isStarred(element), mainImage: this.getMainImage(element), event: element });
+        this.isStarred(element).then(result => {
+          if(result != null){
+            result = true;
+          }
+          this.showEvents.push({ starred: result, mainImage: this.getMainImage(element), event: element });
+        });
       }
     });
 
@@ -144,10 +155,15 @@ export class ListPage {
       eventsFiltered.forEach(element => {
         var re = new RegExp(text.value, 'i');
         if (element.title.match(re)) {
-          this.showEvents.push({ starred: this.isStarred(element), mainImage: this.getMainImage(element), event: element });
+          this.isStarred(element).then(result => {
+            if(result != null){
+              result = true;
+            }
+            this.showEvents.push({ starred: result, mainImage: this.getMainImage(element), event: element });
+          });
         }
       });
-    } else if(typeof text.value != "undefined" && text.value.length < 3){
+    } else if(typeof text.value != "undefined" && text.value.length == 0){
       this.lastFilter = undefined;
     }
 
@@ -173,30 +189,47 @@ export class ListPage {
     }
   }
 
-  isStarred(item) {
+  async isStarred(item) {
     let hash = Md5.hashStr(JSON.stringify(item)).toString();
-    this.get(hash).then(result => {
-      if (result != null) {
-        return true;
-      } else {
-        return false;
-      }
-    });
+    return this.get(hash);
   }
 
   starEvent(item) {
     let hash = Md5.hashStr(JSON.stringify(item.event)).toString();
     this.set(hash, hash).then(result =>
-      this.reconstruct()
+      {
+        this.showEvents.forEach(element => {
+          if(element.event == item.event){
+            element.starred = true;
+          }
+        });
+        this.allEvents.forEach(element => {
+          if(element.event == item.event){
+            element.starred = true;
+          }
+        });
+      }
     );
-
+    
   }
 
   unstarEvent(item) {
     let hash = Md5.hashStr(JSON.stringify(item.event)).toString();
     this.remove(hash).then(result =>
-      this.reconstruct()
+      {
+        this.showEvents.forEach(element => {
+          if(element.event == item.event){
+            element.starred = false;
+          }
+        });
+        this.allEvents.forEach(element => {
+          if(element.event == item.event){
+            element.starred = false;
+          }
+        });
+      }
     );
+
   }
 
   generateCompleteEvent(array){

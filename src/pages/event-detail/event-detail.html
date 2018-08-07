@@ -17,9 +17,8 @@
 
 
 <ion-content>
+    <ion-item no-lines>
     <ion-card>
-
-        <!-- <img src="{{mainImage}}"> -->
         <ion-fab right top>
           <button *ngIf="starred" ion-fab (click)="unstarEvent()">
             <ion-icon name="star"></ion-icon>
@@ -59,4 +58,5 @@
         </ion-item>
       
       </ion-card>
+      </ion-item>
 </ion-content>

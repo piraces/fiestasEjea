@@ -6,6 +6,7 @@ import { FavsPage } from '../favs/favs';
 import { PhonesPage } from '../phones/phones';
 import { AboutPage } from '../about/about';
 import { EventDetailPage } from '../event-detail/event-detail';
+import { ChatPage } from '../chat/chat';
 
 import { EventsService } from '../../services/events';
 
@@ -19,6 +20,7 @@ export class HomePage {
   phonesPage = PhonesPage;
   aboutPage = AboutPage;
   eventPage = EventDetailPage;
+  chatPage = ChatPage;
 
   rightNowEvents: any = [];
   nextEvents: any = [];
