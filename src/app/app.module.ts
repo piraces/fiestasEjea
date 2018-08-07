@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { ErrorHandler, NgModule, APP_INITIALIZER } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
@@ -21,7 +21,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { IonicStorageModule } from '@ionic/storage';
 import { DatePicker } from '@ionic-native/date-picker';
 import { AdMobPro } from '@ionic-native/admob-pro';
+import { ChatPage } from '../pages/chat/chat';
 
+
+export function eventsFactory(events: EventsService) {
+  return  () => events.load();
+}
 
 @NgModule({
   declarations: [
@@ -31,7 +36,8 @@ import { AdMobPro } from '@ionic-native/admob-pro';
     FavsPage,
     PhonesPage,
     AboutPage,
-    EventDetailPage
+    EventDetailPage,
+    ChatPage
   ],
   imports: [
     BrowserModule,
@@ -49,7 +55,8 @@ import { AdMobPro } from '@ionic-native/admob-pro';
     FavsPage,
     PhonesPage,
     AboutPage,
-    EventDetailPage
+    EventDetailPage,
+    ChatPage
   ],
   providers: [
     StatusBar,
@@ -58,6 +65,12 @@ import { AdMobPro } from '@ionic-native/admob-pro';
     AdMobPro,
     InAppBrowser,
     EventsService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: eventsFactory,
+      deps: [EventsService],
+      multi: true
+    },
     DatePicker,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

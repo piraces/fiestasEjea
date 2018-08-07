@@ -8,6 +8,7 @@ import { ListPage } from '../pages/list/list';
 import { FavsPage } from '../pages/favs/favs';
 import { PhonesPage } from '../pages/phones/phones';
 import { AboutPage } from '../pages/about/about';
+import { ChatPage } from '../pages/chat/chat';
 
 @Component({
   templateUrl: 'app.html'
@@ -28,7 +29,8 @@ export class MyApp {
       { title: 'Programa', component: ListPage, icon: 'paper' },
       { title: 'Favoritos', component: FavsPage, icon: 'star' },
       { title: 'Teléfonos', component: PhonesPage, icon: 'call' },
-      { title: 'Sobre las fiestas', component: AboutPage, icon: 'information-circle' }
+      { title: 'Sobre las fiestas', component: AboutPage, icon: 'information-circle' },
+      { title: 'Chat', component: ChatPage, icon: 'chatboxes'}
     ];
 
   }

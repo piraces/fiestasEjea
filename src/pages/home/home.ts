@@ -46,18 +46,32 @@ export class HomePage {
     setTimeout( () => {
       this.admob.onAdDismiss()
       .subscribe(() => { console.log('User dismissed ad'); });
+
+      this.admob.onAdFailLoad()
+      .subscribe(() => { console.log('Ad failload'); });
+
+      this.admob.onAdLeaveApp()
+      .subscribe(() => { console.log('Ad leave app'); });
+
+      this.admob.onAdLoaded()
+      .subscribe(() => { console.log('Ad loaded'); });
+
+      this.admob.onAdPresent()
+      .subscribe(() => { console.log('Ad present'); });
+
       let adId;
       if(this.platform.is('android')) {
         adId = 'ca-app-pub-3240812764495845/4978287685';
       } else if (this.platform.is('ios')) {
         adId = 'ca-app-pub-3240812764495845/9464327607';
       }
+      
       this.admob.createBanner({
         adId: adId,
         position: this.admob.AD_POSITION.BOTTOM_CENTER,
-        isTesting: true
+        isTesting: true,
+        autoShow: true
       });
-      this.admob.showBanner(this.admob.AD_POSITION.BOTTOM_CENTER);
     }, TIME_IN_MS);
     
   }
