@@ -3,8 +3,7 @@ App para las fiestas de Ejea de los caballeros desarrollada con Ionic (Angular),
 
 Actualmente disponible para Android y iOS.
 
-[](https://github.com/piraces/fiestasEjea/raw/master/static/img/promo.jpg)
-
+![Vista de promoción](https://github.com/piraces/fiestasEjea/raw/master/static/img/promo.jpg)
 
 ## Descripción
 
