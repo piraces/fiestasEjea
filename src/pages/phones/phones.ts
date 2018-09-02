@@ -42,9 +42,17 @@ export class PhonesPage {
   healthPhones = [
     { title: 'Seguridad Social: Urgencias', phone: '976 66 17 642' },
     { title: 'Seguridad Social: Cita', phone: '976 66 18 61' },
-    { title: 'Hogar de la Tercera Edad', phone: '976 66 02 54' },
-    { title: 'Funeraria Cinco Villas', phone: '976 66 45 66' },
-    { title: 'Funeraria Vinue', phone: '976 66 14 86' }
+    { title: 'Hogar de la Tercera Edad', phone: '976 66 02 54' }
+  ]
+
+  foodPhones = [
+    { title: 'Ventana de abajo (Bocatería Tentempie) Fijo', phone: '976 66 75 50'},
+    { title: 'Ventana de abajo (Bocatería Tentempie) Movil', phone: '620 16 77 27'},
+    { title: 'Ventana de arriba (Bocatería La Ventana) Fijo', phone: '976 66 76 92'},
+    { title: 'Pizzería Costumbres Argentinas', phone: '976 66 33 44'},
+    { title: 'Río Ming Restaurante', phone: '976 66 02 73'},
+    { title: 'Ejea Doner Kebab (el de Menta)', phone: '976 66 39 30'},
+    { title: 'Telepizza', phone: '976 66 08 19'}
   ]
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private callNumber: CallNumber, private alertCtrl: AlertController) {

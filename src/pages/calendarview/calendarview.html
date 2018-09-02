@@ -1,0 +1,36 @@
+<!--
+  Generated template for the CalendarviewPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Calendario</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+    <ion-calendar #calendar lang="es" (onDaySelect)="onDaySelect($event)" [events]="currentEvents"></ion-calendar>
+    <ion-item-divider color="light">{{dateString}}</ion-item-divider>
+    <ion-item *ngIf="items.length == 0" text-wrap no-lines>
+        No hay ningún evento para este día
+    </ion-item>
+    <ion-list [virtualScroll]="items" [approxItemHeight]="'88px'">
+
+        <ion-item *virtualItem="let item">
+            <button ion-item (click)="pushPage(item)" no-lines>
+                <ion-icon name="{{item.icon}}" item-start></ion-icon>
+                {{item.title}}<br>
+                <ion-badge item-end color="primary" item-buttom>{{item.start.toTimeString().split(' ')[0].substring(0, 5)}}</ion-badge>
+              </button>
+        </ion-item>
+      
+      </ion-list>
+
+</ion-content>

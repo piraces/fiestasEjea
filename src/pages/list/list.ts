@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Md5 } from 'ts-md5/dist/md5';
+import moment from 'moment';
 
 import { EventsService } from '../../services/events';
 
@@ -20,6 +21,9 @@ export class ListPage {
 
   lastFilter: any;
   starred: boolean;
+
+  hash: any;
+  hashEvent: any;
 
   showEvents: any = [];
   allEvents: any = [];
@@ -50,23 +54,6 @@ export class ListPage {
 
   getMainImage(original) {
     let mainImage = "";
-    switch (original.type) {
-      case 'Otros':
-        mainImage = "../../assets/imgs/otros.jpeg";
-        break;
-      case 'Toros':
-        mainImage = "../../assets/imgs/toros.jpeg";
-        break;
-      case 'Música':
-        mainImage = "../../assets/imgs/musica.jpeg";
-        break;
-      case 'Infantil':
-        mainImage = "../../assets/imgs/infantil.jpeg";
-        break;
-      default:
-        mainImage = "../../assets/imgs/otros.jpeg";
-        break;
-    }
     return mainImage;
   }
 
@@ -119,7 +106,8 @@ export class ListPage {
     let eventsFiltered = typeof this.lastFilter == "undefined" ? this.allEvents : this.generateCompleteEvent(this.showEvents);
     this.showEvents = [];
     eventsFiltered.forEach(element => {
-      if (element.start.getDate() == myDate.day && element.start.getMonth() == myDate.month - 1) {
+      if ((myDate.day == element.start.getDate() && element.start.getHours() >=5 && element.start.getMonth() == myDate.month - 1) || 
+      (this.getTomorrow(myDate.day, myDate.month, new Date().getFullYear()) == element.start.getDate() && element.start.getHours() <=5 && this.getMonth(myDate.date, myDate.month, new Date().getFullYear() == myDate.month - 1))) {
         this.isStarred(element).then(result => {
           if(result != null){
             result = true;
@@ -196,6 +184,8 @@ export class ListPage {
 
   starEvent(item) {
     let hash = Md5.hashStr(JSON.stringify(item.event)).toString();
+    this.hash = hash;
+    this.hashEvent = item.event;
     this.set(hash, hash).then(result =>
       {
         this.showEvents.forEach(element => {
@@ -208,9 +198,16 @@ export class ListPage {
             element.starred = true;
           }
         });
+        // let scheduledDate = item.event.start;
+        // scheduledDate.setHours(scheduledDate.getHours() - 1);
+        // this.localNotifications.schedule({
+        //   id: this.hash.toString(),
+        //   title: this.hashEvent.title.toString(),
+        //   text: 'El evento: "' + this.hashEvent.title.toString() + ' comienza en 1h',
+        //   trigger: {at: scheduledDate}
+        // });
       }
     );
-    
   }
 
   unstarEvent(item) {
@@ -227,9 +224,9 @@ export class ListPage {
             element.starred = false;
           }
         });
+        // this.localNotifications.cancel(hash.toString());
       }
     );
-
   }
 
   generateCompleteEvent(array){
@@ -238,6 +235,21 @@ export class ListPage {
       newArray.push(element.event);
     });
     return newArray;
+  }
+
+  getTomorrow(date, month, year){
+    var aux = moment({ year :year, month :month, day :date, hour :0, minute :0, second :0, millisecond :0});
+    return aux.add('days', 1).date();
+  }
+
+  getMonth(date, month, year){
+    var aux = moment({ year :year, month :month, day :date, hour :0, minute :0, second :0, millisecond :0});
+    return aux.add('days', 1).month();
+  }
+
+  getYear(date, month, year){
+    var aux = moment({ year :year, month :month, day :date, hour :0, minute :0, second :0, millisecond :0});
+    return aux.add('days', 1).year();
   }
 
   reconstruct() {
@@ -280,13 +292,19 @@ export class ListPage {
           if (key == hash) {
             let mainImage = this.getMainImage(original);
             isStarred = true;
-            if(currentDate.getDate() == original.start.getDate() && currentDate.getMonth() == original.start.getMonth() && currentDate.getFullYear() == original.start.getFullYear()){
+            if((currentDate.getDate() == original.start.getDate() && original.start.getHours() >=5 && currentDate.getMonth() == original.start.getMonth() && currentDate.getFullYear() == original.start.getFullYear()) 
+            || (this.getTomorrow(currentDate.getDate(), currentDate.getMonth(), currentDate.getFullYear()) == original.start.getDate() && original.start.getHours() <=5
+             && this.getMonth(currentDate.getDate(), currentDate.getMonth(), currentDate.getFullYear()) == original.start.getMonth() 
+             && this.getYear(currentDate.getDate(), currentDate.getMonth(), currentDate.getFullYear()) == original.start.getFullYear())){
               this.showEvents.push({ starred: true, mainImage: mainImage, event: original });
             }
           }
         });
         if (!isStarred) {
-          if(currentDate.getDate() == original.start.getDate() && currentDate.getMonth() == original.start.getMonth() && currentDate.getFullYear() == original.start.getFullYear()){
+          if((currentDate.getDate() == original.start.getDate() && original.start.getHours() >=5 && currentDate.getMonth() == original.start.getMonth() && currentDate.getFullYear() == original.start.getFullYear()) 
+            || (this.getTomorrow(currentDate.getDate(), currentDate.getMonth(), currentDate.getFullYear()) == original.start.getDate() && original.start.getHours() <=5
+             && this.getMonth(currentDate.getDate(), currentDate.getMonth(), currentDate.getFullYear()) == original.start.getMonth() 
+             && this.getYear(currentDate.getDate(), currentDate.getMonth(), currentDate.getFullYear()) == original.start.getFullYear())){
             this.showEvents.push({ starred: false, mainImage: this.getMainImage(original), event: original });
           }
         }
@@ -310,13 +328,19 @@ export class ListPage {
           if (key == hash) {
             let mainImage = this.getMainImage(original);
             isStarred = true;
-            if(currentDate.getDate() == original.start.getDate() && currentDate.getMonth() == original.start.getMonth() && currentDate.getFullYear() == original.start.getFullYear()){
+            if((currentDate.getDate() == original.start.getDate() && original.start.getHours() >=5 && currentDate.getMonth() == original.start.getMonth() && currentDate.getFullYear() == original.start.getFullYear()) 
+            || (this.getTomorrow(currentDate.getDate(), currentDate.getMonth(), currentDate.getFullYear()) == original.start.getDate() && original.start.getHours() <=5
+             && this.getMonth(currentDate.getDate(), currentDate.getMonth(), currentDate.getFullYear()) == original.start.getMonth() 
+             && this.getYear(currentDate.getDate(), currentDate.getMonth(), currentDate.getFullYear()) == original.start.getFullYear())){
               this.showEvents.push({ starred: true, mainImage: mainImage, event: original });
             }
           }
         });
         if (!isStarred) {
-          if(currentDate.getDate() == original.start.getDate() && currentDate.getMonth() == original.start.getMonth() && currentDate.getFullYear() == original.start.getFullYear()){
+          if((currentDate.getDate() == original.start.getDate() && original.start.getHours() >=5 && currentDate.getMonth() == original.start.getMonth() && currentDate.getFullYear() == original.start.getFullYear()) 
+            || (this.getTomorrow(currentDate.getDate(), currentDate.getMonth(), currentDate.getFullYear()) == original.start.getDate() && original.start.getHours() <=5
+             && this.getMonth(currentDate.getDate(), currentDate.getMonth(), currentDate.getFullYear()) == original.start.getMonth() 
+             && this.getYear(currentDate.getDate(), currentDate.getMonth(), currentDate.getFullYear()) == original.start.getFullYear())){
             this.showEvents.push({ starred: false, mainImage: this.getMainImage(original), event: original })
           }
         }
@@ -341,13 +365,19 @@ export class ListPage {
           if (key == hash) {
             let mainImage = this.getMainImage(original);
             isStarred = true;
-            if(currentDate.getDate() == original.start.getDate() && currentDate.getMonth() == original.start.getMonth() && currentDate.getFullYear() == original.start.getFullYear()){
+            if((currentDate.getDate() == original.start.getDate() && original.start.getHours() >=5 && currentDate.getMonth() == original.start.getMonth() && currentDate.getFullYear() == original.start.getFullYear()) 
+            || (this.getTomorrow(currentDate.getDate(), currentDate.getMonth(), currentDate.getFullYear()) == original.start.getDate() && original.start.getHours() <=5
+             && this.getMonth(currentDate.getDate(), currentDate.getMonth(), currentDate.getFullYear()) == original.start.getMonth() 
+             && this.getYear(currentDate.getDate(), currentDate.getMonth(), currentDate.getFullYear()) == original.start.getFullYear())){
               this.showEvents.push({ starred: true, mainImage: mainImage, event: original });
             }
           }
         });
         if (!isStarred) {
-          if(currentDate.getDate() == original.start.getDate() && currentDate.getMonth() == original.start.getMonth() && currentDate.getFullYear() == original.start.getFullYear()){
+          if((currentDate.getDate() == original.start.getDate() && original.start.getHours() >=5 && currentDate.getMonth() == original.start.getMonth() && currentDate.getFullYear() == original.start.getFullYear()) 
+            || (this.getTomorrow(currentDate.getDate(), currentDate.getMonth(), currentDate.getFullYear()) == original.start.getDate() && original.start.getHours() <=5
+             && this.getMonth(currentDate.getDate(), currentDate.getMonth(), currentDate.getFullYear()) == original.start.getMonth() 
+             && this.getYear(currentDate.getDate(), currentDate.getMonth(), currentDate.getFullYear()) == original.start.getFullYear())){
             this.showEvents.push({ starred: false, mainImage: this.getMainImage(original), event: original })
           }
         }

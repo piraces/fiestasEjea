@@ -20,27 +20,13 @@ export class EventDetailPage {
   event: any;
   starred: boolean;
   hash: any;
+  hashEvent: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
     this.event = navParams.data;
-    switch(this.event.type){
-      case 'Otros':
-        this.mainImage = "../../assets/imgs/otros.jpeg";
-        break;
-      case 'Toros':
-        this.mainImage = "../../assets/imgs/toros.jpeg";
-        break;
-      case 'Música':
-        this.mainImage = "../../assets/imgs/musica.jpeg";
-        break;
-      case 'Infantil':
-        this.mainImage = "../../assets/imgs/infantil.jpeg";
-        break;
-      default:
-        this.mainImage = "../../assets/imgs/otros.jpeg";
-        break;
-    }
+    this.mainImage = "";
     this.hash = Md5.hashStr(JSON.stringify(this.event)).toString();
+    this.hashEvent = this.event;
     this.get(this.hash).then(data => {
       this.starred = data != null;
     });
@@ -54,11 +40,21 @@ export class EventDetailPage {
   unstarEvent(){
     this.remove(this.hash);
     this.starred = false;
+    // this.localNotifications.cancel(this.hash.toString());
   }
 
   starEvent(){
-    this.set(this.hash, this.hash);
-    this.starred = true;
+    this.set(this.hash, this.hash).then(result => {
+      this.starred = true;
+      // let scheduledDate = this.hashEvent.start;
+      // scheduledDate.setHours(scheduledDate.getHours() - 1);
+      // this.localNotifications.schedule({
+      //   id: this.hash.toString(),
+      //   title: this.hashEvent.title.toString(),
+      //   text: 'El evento: "' + this.hashEvent.title.toString() + ' comienza en 1h',
+      //   trigger: {at: scheduledDate}
+      // });
+    });
   }
 
   public set(settingName,value){

@@ -76,7 +76,57 @@
         </i>
       </span>
     </ion-item>
+    <ion-item (click)="toggleGroup(3)">
+      <ion-icon name="information-circle" item-start></ion-icon>
+      Información de interés
+    </ion-item>
+    <ion-item class="item-accordion" *ngIf="isGroupShown(3)">
+      <span class="textoInfo">
+        <br/> Los conciertos y bailes del <b>Casino España</b> forman parte de la programación festiva de esa entidad.
+        La entrada sólo es gratuita para los socios.
+        <br/>
+        <br/>Los <b>festejos taurinos</b> de la Plaza de Toros han sido organizados por la empresa TAUROEJEA, con
+        la colaboración del Ayuntamiento de Ejea.
+        <br/>
+        <br/>El miércoles, día 5 de septiembre, los precios de las ferias tendrán un descuento del 50% respecto a
+        sus precios habituales, con la colaboración de la <b>Asociación Profesional de Industriales Feriantes
+        de Zaragoza</b>.
+        <br/>
+        <br/>Queda terminantemente <b>prohibido hacer fuego</b> en cualquier espacio abierto, de acuerdo con
+        lo establecido en la legislación vigente. La misma prohibición se establece respecto al uso de
+        petardos.
+        <br/>
+        <br/>Los itinerarios que los <b>Cabezudos</b> seguirán cada día se expondrán en la puerta de la Policía Local
+        o podrán consultarse en la web municipal. 
+        <br/>
+        <br/>Durante las Verbenas Populares saldrán <b>Toros de Fuego</b> por los itinerarios reseñados en el
+        programa, lo que se informa al público a efectos de que no se aparquen coches en dichas calles
+        por riesgo de sufrir daños con las cargas de fuego de los toros. Lo mismo se avisa para el caso de
+        las personas.
+        <br/>
+        <br/>Ante las <b>adversidades meteorológicas</b>, en el caso de producirse grandes lluvias y siempre que
+        puedan preverse con la suficiente antelación para hacer efectivos los cambios de infraestructuras
+        y equipos, los espectáculos musicales se trasladarán al Recinto Ferial y los espectáculos infantiles
+        al Pabellón Polideportivo de La Llana. 
 
+        <br/>
+        <br/>
+      </span>
+    </ion-item>
+    <ion-item (click)="toggleGroup(4)">
+      <ion-icon name="information-circle" item-start></ion-icon>
+      Durante todo el día...
+    </ion-item>
+    <ion-item class="item-accordion" *ngIf="isGroupShown(4)">
+      <span class="textoInfo">
+        <br/> Durante todo el día actuarán <b>las Charangas Artistas del Gremio, Los Zagales del Gallego y Rivascor</b>. 
+        <br/>
+        <br/>Con salidas desde el Parque Central, un <b>tren infantil</b> recorrerá las distintas calles de la localidad.
+
+        <br/>
+        <br/>
+      </span>
+    </ion-item>
 
   </ion-list>
 </ion-content>

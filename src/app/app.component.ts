@@ -2,13 +2,20 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { AdMobFree } from '@ionic-native/admob-free';
+import { Pro } from '@ionic/pro'; // TODO: quit Ionic Pro support
 
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { CalendarviewPage } from '../pages/calendarview/calendarview';
 import { FavsPage } from '../pages/favs/favs';
 import { PhonesPage } from '../pages/phones/phones';
 import { AboutPage } from '../pages/about/about';
 import { ChatPage } from '../pages/chat/chat';
+
+import * as firebase from 'firebase';
+
+// TODO: FIREBASE CONFIG
 
 @Component({
   templateUrl: 'app.html'
@@ -20,19 +27,100 @@ export class MyApp {
 
   pages: Array<{title: string, component: any, icon: string}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  intersitialReady: boolean = true;
+  intersitial: any;
+  banner: any;
+
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private admob: AdMobFree) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Inicio', component: HomePage, icon: 'home' },
       { title: 'Programa', component: ListPage, icon: 'paper' },
+      { title: 'Calendario', component: CalendarviewPage, icon: 'calendar' },
       { title: 'Favoritos', component: FavsPage, icon: 'star' },
       { title: 'Teléfonos', component: PhonesPage, icon: 'call' },
       { title: 'Sobre las fiestas', component: AboutPage, icon: 'information-circle' },
       { title: 'Chat', component: ChatPage, icon: 'chatboxes'}
     ];
+    //firebase.initializeApp(config);
 
+    this.platform.ready().then(() => {
+      this.admob.banner.remove();
+      // Ads section
+      let adId;
+      // TODO: get from config file
+
+      this.admob.banner.config({
+        id: adId,
+        isTesting: false,
+        autoShow: true
+      });
+
+      this.admob.banner.prepare().then((result)=>{
+        console.log(result);
+      },(reason)=>{
+        Pro.monitoring.handleNewError(reason);
+      });
+
+      let TIME_IN_MS_INTERSITIAL = 120000;
+      this.intersitial = setTimeout( () => {
+        let interstitialId ;
+        
+        
+        this.admob.interstitial.config({
+          id: interstitialId,
+          isTesting: false,
+          autoShow: true,
+          });
+        this.admob.interstitial.prepare().then((result)=>{
+          console.log(result);
+        },(reason)=>{
+          Pro.monitoring.handleNewError(reason);
+        });
+      }, TIME_IN_MS_INTERSITIAL);
+      
+      //Subscribe on pause
+      this.platform.pause.subscribe(() => {
+        clearTimeout(this.intersitial);
+      });
+      //Subscribe on resume
+      this.platform.resume.subscribe(() => {
+        this.admob.banner.remove();
+        // Ads section
+        let adId;
+        // TODO: get from config file
+        
+        this.admob.banner.config({
+          id: adId,
+          isTesting: false,
+          autoShow: true
+        });
+
+        this.admob.banner.prepare().then((result)=>{
+          console.log(result);
+        },(reason)=>{
+          Pro.monitoring.handleNewError(reason);
+        });
+
+        this.intersitial = setTimeout( () => {
+          let interstitialId ;
+          
+          
+          this.admob.interstitial.config({
+            id: interstitialId,
+            isTesting: false,
+            autoShow: true,
+            });
+          this.admob.interstitial.prepare().then((result)=>{
+            console.log(result);
+          },(reason)=>{
+            Pro.monitoring.handleNewError(reason);
+          });
+        }, TIME_IN_MS_INTERSITIAL);
+      });
+    });
   }
 
   initializeApp() {

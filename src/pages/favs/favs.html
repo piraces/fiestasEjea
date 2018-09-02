@@ -38,27 +38,27 @@
                   <p>{{item.event.description}}</p>
                 </ion-item>
               
-                <ion-item text-wrap>
+                <ion-item *ngIf="item.event.artists" text-wrap>
                   <ion-icon name="body" item-start large ></ion-icon>
                   <h2>Artista(s):</h2>
                   <p>{{item.event.artists}}</p>
                 </ion-item>
           
-                <ion-item text-wrap>
+                <ion-item *ngIf="item.event.colaborators" text-wrap>
                   <ion-icon name="contacts" item-start large ></ion-icon>
                   <h2>Colaboran:</h2>
                   <p>{{item.event.colaborators}}</p>
                 </ion-item>
               
-                <ion-item text-wrap>
+                <ion-item *ngIf="item.event.place" text-wrap>
                     <ion-icon name="pin" item-start large ></ion-icon>
                     <h2>Lugar:</h2>
                     <p>{{item.event.place}}</p>
                   </ion-item>
           
-                <ion-item text-wrap>
+                <ion-item *ngIf="item.event.start" text-wrap>
                   <span item-start>{{item.event.start.toLocaleDateString('es-ES', { weekday: 'short', month: 'short', day: 'numeric' })}} - {{item.event.start.toTimeString().split(' ')[0].substring(0, 5)}}</span>
-                  <span *ngIf="item.event.end" item-start>➡ {{item.event.end.toLocaleDateString('es-ES', { weekday: 'short', month: 'short', day: 'numeric' })}} - {{item.event.end.toTimeString().split(' ')[0].substring(0, 5)}}</span>
+                  <span *ngIf="item.event.end.getTime() > 0" item-start>➡ {{item.event.end.toLocaleDateString('es-ES', { weekday: 'short', month: 'short', day: 'numeric' })}} - {{item.event.end.toTimeString().split(' ')[0].substring(0, 5)}}</span>
                 </ion-item>
     
             </ion-card>

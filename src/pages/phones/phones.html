@@ -32,6 +32,20 @@
       </ion-card>
 
       <ion-card>
+        <ion-card-header color="primary"> 
+          <strong>Comida a domicilio</strong>
+        </ion-card-header>
+      
+        <ion-list>
+          <button ion-item *ngFor="let p of foodPhones" (click)="callPhone(p.phone)">
+            <ion-icon name="call" item-end></ion-icon>
+            <strong>{{p.title}}</strong><br>
+            {{p.phone}}
+          </button>
+        </ion-list>
+      </ion-card>
+
+      <ion-card>
           <ion-card-header color="primary"> 
             <strong>Información</strong>
           </ion-card-header>

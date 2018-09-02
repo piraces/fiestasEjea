@@ -29,23 +29,6 @@ export class FavsPage {
           if(key == hash){
             let mainImage = "";
             let starred = true;
-            switch(original.type){
-              case 'Otros':
-                mainImage = "../../assets/imgs/otros.jpeg";
-                break;
-              case 'Toros':
-                mainImage = "../../assets/imgs/toros.jpeg";
-                break;
-              case 'Música':
-                mainImage = "../../assets/imgs/musica.jpeg";
-                break;
-              case 'Infantil':
-                mainImage = "../../assets/imgs/infantil.jpeg";
-                break;
-              default:
-                mainImage = "../../assets/imgs/otros.jpeg";
-                break;
-            }
             this.favEvents.push({starred: starred, mainImage: mainImage, event: original});
           }
         });
@@ -68,6 +51,7 @@ export class FavsPage {
       this.favEvents.splice(index, 1);
     }
     this.remove(hash);
+    // this.localNotifications.cancel(hash.toString());
   }
 
   public set(settingName,value){

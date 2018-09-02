@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { NavController, Platform } from 'ionic-angular';
-import { AdMobPro } from '@ionic-native/admob-pro';
+import { NavController, LoadingController } from 'ionic-angular';
+
 import { ListPage } from '../list/list';
 import { FavsPage } from '../favs/favs';
 import { PhonesPage } from '../phones/phones';
 import { AboutPage } from '../about/about';
 import { EventDetailPage } from '../event-detail/event-detail';
 import { ChatPage } from '../chat/chat';
+import { CalendarviewPage } from '../calendarview/calendarview';
 
 import { EventsService } from '../../services/events';
 
@@ -21,63 +22,44 @@ export class HomePage {
   aboutPage = AboutPage;
   eventPage = EventDetailPage;
   chatPage = ChatPage;
+  calendarPage = CalendarviewPage;
 
   rightNowEvents: any = [];
   nextEvents: any = [];
 
+  loading: any;
+
   
 
-  constructor(public navCtrl: NavController, public events: EventsService, private admob: AdMobPro, private platform: Platform) {
+  constructor(public navCtrl: NavController, public events: EventsService, public loadingController: LoadingController) {
     //this.rightNowEvents = events.allEvents
     events.allEvents.forEach(element => {
 
-      // OrganizaciÃ³n de eventos actuales
+      // Organización de eventos actuales
       var hours = Math.abs(element.start.getTime() - new Date().getTime()) / 3600000;
-      if(hours <= 5){
+      if(element.start > new Date() && hours <= 5){
         this.rightNowEvents.push(element);
       }
       this.rightNowEvents = this.rightNowEvents.slice(0, 5);
 
-      // OrganizaciÃ³n de prÃ³ximos eventos
+      // Organización de próximos eventos
       if(element.start > new Date() && hours > 5){
         this.nextEvents.push(element);
       }
       this.nextEvents = this.nextEvents.slice(0, 5);
     });
-    let TIME_IN_MS = 2000;
-    setTimeout( () => {
-      this.admob.onAdDismiss()
-      .subscribe(() => { console.log('User dismissed ad'); });
-
-      this.admob.onAdFailLoad()
-      .subscribe(() => { console.log('Ad failload'); });
-
-      this.admob.onAdLeaveApp()
-      .subscribe(() => { console.log('Ad leave app'); });
-
-      this.admob.onAdLoaded()
-      .subscribe(() => { console.log('Ad loaded'); });
-
-      this.admob.onAdPresent()
-      .subscribe(() => { console.log('Ad present'); });
-
-      let adId;
-      if(this.platform.is('android')) {
-        adId = 'ca-app-pub-3240812764495845/4978287685';
-      } else if (this.platform.is('ios')) {
-        adId = 'ca-app-pub-3240812764495845/9464327607';
-      }
-      
-      this.admob.createBanner({
-        adId: adId,
-        position: this.admob.AD_POSITION.BOTTOM_CENTER,
-        isTesting: true,
-        autoShow: true
-      });
-    }, TIME_IN_MS);
     
   }
 
+  ionViewWillEnter(){
+    console.log("Will enter");
+    this.loading = this.loadingController.create({ content: "Cargando..." });
+    this.loading.present();
+  }
+
+  ionViewDidEnter(){
+    this.loading.dismiss();
+  }
 
   customTrackBy(index: number, obj: any): any {
     return index;

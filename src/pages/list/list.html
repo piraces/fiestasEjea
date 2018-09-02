@@ -45,50 +45,47 @@
       No hay ningún evento disponible...
   </ion-item>
 
-  <ion-list no-lines>
-    <ion-item-sliding *ngFor="let item of showEvents; let i = index; trackBy: customTrackBy">
-      <ion-item>
-        <ion-card>
-            <ion-fab right top>
-              <button *ngIf="item.starred" ion-fab (click)="unstarEvent(item)">
-                <ion-icon name="star"></ion-icon>
-              </button>
-              <button *ngIf="!item.starred" ion-fab (click)="starEvent(item)">
-                <ion-icon name="star-outline"></ion-icon>
-              </button>
-            </ion-fab>
-            <ion-item text-wrap>
-              <ion-icon name="{{item.event.icon}}" item-start large></ion-icon>
-              <h2>{{item.event.title}}</h2>
-              <p>{{item.event.description}}</p>
+  <ion-list no-lines [virtualScroll]="showEvents" [virtualTrackBy]="customTrackBy" [approxItemHeight]="'500px'">
+    <ion-item *virtualItem="let item">
+      <ion-card>
+          <ion-fab right top>
+            <button *ngIf="item.starred" ion-fab (click)="unstarEvent(item)">
+              <ion-icon name="star"></ion-icon>
+            </button>
+            <button *ngIf="!item.starred" ion-fab (click)="starEvent(item)">
+              <ion-icon name="star-outline"></ion-icon>
+            </button>
+          </ion-fab>
+          <ion-item text-wrap>
+            <ion-icon name="{{item.event.icon}}" item-start large></ion-icon>
+            <h2>{{item.event.title}}</h2>
+            <p>{{item.event.description}}</p>
+          </ion-item>
+        
+          <ion-item *ngIf="item.event.artists" text-wrap>
+            <ion-icon name="body" item-start large ></ion-icon>
+            <h2>Artista(s):</h2>
+            <p>{{item.event.artists}}</p>
+          </ion-item>
+    
+          <ion-item *ngIf="item.event.colaborators" text-wrap>
+            <ion-icon name="contacts" item-start large ></ion-icon>
+            <h2>Colaboran:</h2>
+            <p>{{item.event.colaborators}}</p>
+          </ion-item>
+        
+          <ion-item *ngIf="item.event.place" text-wrap>
+              <ion-icon name="pin" item-start large ></ion-icon>
+              <h2>Lugar:</h2>
+              <p>{{item.event.place}}</p>
             </ion-item>
-          
-            <ion-item text-wrap>
-              <ion-icon name="body" item-start large ></ion-icon>
-              <h2>Artista(s):</h2>
-              <p>{{item.event.artists}}</p>
-            </ion-item>
-      
-            <ion-item text-wrap>
-              <ion-icon name="contacts" item-start large ></ion-icon>
-              <h2>Colaboran:</h2>
-              <p>{{item.event.colaborators}}</p>
-            </ion-item>
-          
-            <ion-item text-wrap>
-                <ion-icon name="pin" item-start large ></ion-icon>
-                <h2>Lugar:</h2>
-                <p>{{item.event.place}}</p>
-              </ion-item>
-      
-            <ion-item text-wrap>
-              <span item-start>{{item.event.start.toLocaleDateString('es-ES', { weekday: 'short', month: 'short', day: 'numeric' })}} - {{item.event.start.toTimeString().split(' ')[0].substring(0, 5)}}</span>
-              <span *ngIf="item.event.end" item-start>➡ {{item.event.end.toLocaleDateString('es-ES', { weekday: 'short', month: 'short', day: 'numeric' })}} - {{item.event.end.toTimeString().split(' ')[0].substring(0, 5)}}</span>
-            </ion-item>
+    
+          <ion-item *ngIf="item.event.start" text-wrap>
+            <span item-start>{{item.event.start.toLocaleDateString('es-ES', { weekday: 'short', month: 'short', day: 'numeric' })}} - {{item.event.start.toTimeString().split(' ')[0].substring(0, 5)}}</span>
+            <span *ngIf="item.event.end.getTime() > 0" item-start>➡ {{item.event.end.toLocaleDateString('es-ES', { weekday: 'short', month: 'short', day: 'numeric' })}} - {{item.event.end.toTimeString().split(' ')[0].substring(0, 5)}}</span>
+          </ion-item>
 
-        </ion-card>
-      </ion-item>
-    </ion-item-sliding>
+      </ion-card>
+    </ion-item>
   </ion-list>
-
 </ion-content>

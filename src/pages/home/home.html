@@ -11,7 +11,7 @@
   <ion-card>
     <ion-card-header>
       <ion-icon name="time" item-start></ion-icon> 
-      <strong>Ahora mismo...</strong>
+      <strong>A continuación...</strong>
     </ion-card-header>
   
     <ion-list>
@@ -49,6 +49,11 @@
   <button ion-button block icon-start [navPush]="programPage">
     <ion-icon name="paper" item-start></ion-icon>
     <strong>Programa</strong>
+  </button>
+
+  <button ion-button block icon-start [navPush]="calendarPage">
+    <ion-icon name="calendar" item-start></ion-icon>
+    <strong>Calendario</strong>
   </button>
 
   <button ion-button block icon-start [navPush]="favsPage">

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1093028778751",
+    "firebase_url": "https://fiestas-de-ejea.firebaseio.com",
+    "project_id": "fiestas-de-ejea",
+    "storage_bucket": "fiestas-de-ejea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1093028778751:android:88856060369aeaae",
+        "android_client_info": {
+          "package_name": "com.piraces.fiestasEjea"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1093028778751-9qijdbg1dhhlcmrrve6u882gj8pp1sg5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDeb7YlF44lLfZw4hiED7Sh4NsAq2Zoz8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
