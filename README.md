@@ -1,4 +1,7 @@
 # Fiestas de Ejea
+
+[![Build Status](https://app.bitrise.io/app/d02708923f993056/status.svg?token=XYSePkoDu7Qt0ld6YKVbAg)](https://app.bitrise.io/app/d02708923f993056)
+
 App para las fiestas de Ejea de los caballeros desarrollada con Ionic (Angular), Firebase y con CI/CD.
 
 Actualmente disponible para Android y iOS.
