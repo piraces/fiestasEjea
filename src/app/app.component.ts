@@ -3,7 +3,7 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AdMobFree } from '@ionic-native/admob-free';
-import { Pro } from '@ionic/pro'; // TODO: quit Ionic Pro support
+import { Pro } from '@ionic/pro';
 
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
@@ -14,8 +14,6 @@ import { AboutPage } from '../pages/about/about';
 import { ChatPage } from '../pages/chat/chat';
 
 import * as firebase from 'firebase';
-
-// TODO: FIREBASE CONFIG
 
 @Component({
   templateUrl: 'app.html'
@@ -44,13 +42,27 @@ export class MyApp {
       { title: 'Sobre las fiestas', component: AboutPage, icon: 'information-circle' },
       { title: 'Chat', component: ChatPage, icon: 'chatboxes'}
     ];
-    //firebase.initializeApp(config);
+
+    let config = {
+      apiKey: '$FIREBASE_APIKEY',
+      authDomain: '$FIREBASE_AUTHDOMAIN',
+      databaseURL: '$FIREBASE_DATABASEURL',
+      projectId: '$FIREBASE_PROJECTID',
+      storageBucket: '$FIREBASE_STORAGEBUCKET',
+      messagingSenderId: "$FIREBASE_MESSAGESENDERID"
+    };
+
+    firebase.initializeApp(config);
 
     this.platform.ready().then(() => {
       this.admob.banner.remove();
       // Ads section
       let adId;
-      // TODO: get from config file
+      if(this.platform.is('android')) {
+        adId = '$ADMOB_BANNER_ANDROID';
+      } else if (this.platform.is('ios')) {
+        adId = '$ADMOB_BANNER_IOS';
+      }
 
       this.admob.banner.config({
         id: adId,
@@ -67,7 +79,13 @@ export class MyApp {
       let TIME_IN_MS_INTERSITIAL = 120000;
       this.intersitial = setTimeout( () => {
         let interstitialId ;
-        
+        if(this.platform.is('android')) {
+          adId = '$ADMOB_BANNER_ANDROID';
+          interstitialId = '$ADMOB_INTERSITIAL_ANDROID';
+        } else if (this.platform.is('ios')) {
+          adId = '$ADMOB_BANNER_IOS';
+          interstitialId = '$ADMOB_INTERSITIAL_IOS';
+        }
         
         this.admob.interstitial.config({
           id: interstitialId,
@@ -90,7 +108,11 @@ export class MyApp {
         this.admob.banner.remove();
         // Ads section
         let adId;
-        // TODO: get from config file
+        if(this.platform.is('android')) {
+          adId = '$ADMOB_BANNER_ANDROID';
+        } else if (this.platform.is('ios')) {
+          adId = '$ADMOB_BANNER_IOS';
+        }
         
         this.admob.banner.config({
           id: adId,
@@ -106,7 +128,13 @@ export class MyApp {
 
         this.intersitial = setTimeout( () => {
           let interstitialId ;
-          
+          if(this.platform.is('android')) {
+            adId = '$ADMOB_BANNER_ANDROID';
+            interstitialId = '$ADMOB_INTERSITIAL_ANDROID';
+          } else if (this.platform.is('ios')) {
+            adId = '$ADMOB_BANNER_IOS';
+            interstitialId = '$ADMOB_INTERSITIAL_IOS';
+          }
           
           this.admob.interstitial.config({
             id: interstitialId,

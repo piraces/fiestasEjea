@@ -1,0 +1,42 @@
+{
+    "project_info": {
+      "project_number": "$GS_PROJECTNUMBER",
+      "firebase_url": "$GS_FIREBASEURL",
+      "project_id": "$GS_PROJECTID",
+      "storage_bucket": "$GS_STORAGEBUCKET"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "$GS_MOBILESDK_APPID",
+          "android_client_info": {
+            "package_name": "$GS_PACKAGENAME"
+          }
+        },
+        "oauth_client": [
+          {
+            "client_id": "$GS_CLIENTID",
+            "client_type": 3
+          }
+        ],
+        "api_key": [
+          {
+            "current_key": "$GS_CURRENTKEY"
+          }
+        ],
+        "services": {
+          "analytics_service": {
+            "status": 1
+          },
+          "appinvite_service": {
+            "status": 1,
+            "other_platform_oauth_client": []
+          },
+          "ads_service": {
+            "status": 2
+          }
+        }
+      }
+    ],
+    "configuration_version": "1"
+  }

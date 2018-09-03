@@ -62,8 +62,11 @@ export class HomeChatPage {
   ionViewWillLeave(){
     this.offStatus = true;
     let adId;
-    // TODO: get from config file
-
+    if(this.platform.is('android')) {
+      adId = '$ADMOB_BANNER_ANDROID';
+    } else if (this.platform.is('ios')) {
+      adId = '$ADMOB_BANNER_IOS';
+    }
       this.admob.banner.config({
         id: adId,
         isTesting: false,

@@ -33,8 +33,4 @@ $RECYCLE.BIN/
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
-
-# Sensible data
-google-services.json
-GoogleService-Info.plist
 src/services/config.js
