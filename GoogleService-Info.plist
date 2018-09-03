@@ -3,25 +3,25 @@
 <plist version="1.0">
 <dict>
 	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
-	<string>$AD_UNIT_ID_FOR_BANNER_TEST</string>
+	<string>$R_AD_UNIT_ID_FOR_BANNER_TEST</string>
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
-	<string>$AD_UNIT_ID_FOR_INTERSTITIAL_TEST</string>
+	<string>$R_AD_UNIT_ID_FOR_INTERSTITIAL_TEST</string>
 	<key>CLIENT_ID</key>
-	<string>$CLIENT_ID</string>
+	<string>$R_CLIENT_ID</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>$REVERSED_CLIENT_ID</string>
+	<string>$R_REVERSED_CLIENT_ID</string>
 	<key>API_KEY</key>
-	<string>$API_KEY</string>
+	<string>$R_API_KEY</string>
 	<key>GCM_SENDER_ID</key>
-	<string>$GCM_SENDER_ID</string>
+	<string>$R_GCM_SENDER_ID</string>
 	<key>PLIST_VERSION</key>
-	<string>$PLIST_VERSION</string>
+	<string>$R_PLIST_VERSION</string>
 	<key>BUNDLE_ID</key>
-	<string>$BUNDLE_ID</string>
+	<string>$R_BUNDLE_ID</string>
 	<key>PROJECT_ID</key>
-	<string>$PROJECT_ID</string>
+	<string>$R_PROJECT_ID</string>
 	<key>STORAGE_BUCKET</key>
-	<string>$STORAGE_BUCKET</string>
+	<string>$R_STORAGE_BUCKET</string>
 	<key>IS_ADS_ENABLED</key>
 	<true></true>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>$GOOGLE_APP_ID</string>
+	<string>$R_GOOGLE_APP_ID</string>
 	<key>DATABASE_URL</key>
-	<string>$DATABASE_URL</string>
+	<string>$R_DATABASE_URL</string>
 </dict>
 </plist>

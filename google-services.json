@@ -1,27 +1,27 @@
 {
     "project_info": {
-      "project_number": "$GS_PROJECTNUMBER",
-      "firebase_url": "$GS_FIREBASEURL",
-      "project_id": "$GS_PROJECTID",
-      "storage_bucket": "$GS_STORAGEBUCKET"
+      "project_number": "$R_GS_PROJECTNUMBER",
+      "firebase_url": "$R_GS_FIREBASEURL",
+      "project_id": "$R_GS_PROJECTID",
+      "storage_bucket": "$R_GS_STORAGEBUCKET"
     },
     "client": [
       {
         "client_info": {
-          "mobilesdk_app_id": "$GS_MOBILESDK_APPID",
+          "mobilesdk_app_id": "$R_GS_MOBILESDK_APPID",
           "android_client_info": {
-            "package_name": "$GS_PACKAGENAME"
+            "package_name": "$R_GS_PACKAGENAME"
           }
         },
         "oauth_client": [
           {
-            "client_id": "$GS_CLIENTID",
+            "client_id": "$R_GS_CLIENTID",
             "client_type": 3
           }
         ],
         "api_key": [
           {
-            "current_key": "$GS_CURRENTKEY"
+            "current_key": "$R_GS_CURRENTKEY"
           }
         ],
         "services": {

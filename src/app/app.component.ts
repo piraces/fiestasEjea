@@ -44,12 +44,12 @@ export class MyApp {
     ];
 
     let config = {
-      apiKey: '$FIREBASE_APIKEY',
-      authDomain: '$FIREBASE_AUTHDOMAIN',
-      databaseURL: '$FIREBASE_DATABASEURL',
-      projectId: '$FIREBASE_PROJECTID',
-      storageBucket: '$FIREBASE_STORAGEBUCKET',
-      messagingSenderId: "$FIREBASE_MESSAGESENDERID"
+      apiKey: '$R_FIREBASE_APIKEY',
+      authDomain: '$R_FIREBASE_AUTHDOMAIN',
+      databaseURL: '$R_FIREBASE_DATABASEURL',
+      projectId: '$R_FIREBASE_PROJECTID',
+      storageBucket: '$R_FIREBASE_STORAGEBUCKET',
+      messagingSenderId: "$R_FIREBASE_MESSAGESENDERID"
     };
 
     firebase.initializeApp(config);
@@ -59,9 +59,9 @@ export class MyApp {
       // Ads section
       let adId;
       if(this.platform.is('android')) {
-        adId = '$ADMOB_BANNER_ANDROID';
+        adId = '$R_ADMOB_BANNER_ANDROID';
       } else if (this.platform.is('ios')) {
-        adId = '$ADMOB_BANNER_IOS';
+        adId = '$R_ADMOB_BANNER_IOS';
       }
 
       this.admob.banner.config({
@@ -80,11 +80,11 @@ export class MyApp {
       this.intersitial = setTimeout( () => {
         let interstitialId ;
         if(this.platform.is('android')) {
-          adId = '$ADMOB_BANNER_ANDROID';
-          interstitialId = '$ADMOB_INTERSITIAL_ANDROID';
+          adId = '$R_ADMOB_BANNER_ANDROID';
+          interstitialId = '$R_ADMOB_INTERSITIAL_ANDROID';
         } else if (this.platform.is('ios')) {
-          adId = '$ADMOB_BANNER_IOS';
-          interstitialId = '$ADMOB_INTERSITIAL_IOS';
+          adId = '$R_ADMOB_BANNER_IOS';
+          interstitialId = '$R_ADMOB_INTERSITIAL_IOS';
         }
         
         this.admob.interstitial.config({
@@ -109,9 +109,9 @@ export class MyApp {
         // Ads section
         let adId;
         if(this.platform.is('android')) {
-          adId = '$ADMOB_BANNER_ANDROID';
+          adId = '$R_ADMOB_BANNER_ANDROID';
         } else if (this.platform.is('ios')) {
-          adId = '$ADMOB_BANNER_IOS';
+          adId = '$R_ADMOB_BANNER_IOS';
         }
         
         this.admob.banner.config({
@@ -129,11 +129,11 @@ export class MyApp {
         this.intersitial = setTimeout( () => {
           let interstitialId ;
           if(this.platform.is('android')) {
-            adId = '$ADMOB_BANNER_ANDROID';
-            interstitialId = '$ADMOB_INTERSITIAL_ANDROID';
+            adId = '$R_ADMOB_BANNER_ANDROID';
+            interstitialId = '$R_ADMOB_INTERSITIAL_ANDROID';
           } else if (this.platform.is('ios')) {
-            adId = '$ADMOB_BANNER_IOS';
-            interstitialId = '$ADMOB_INTERSITIAL_IOS';
+            adId = '$R_ADMOB_BANNER_IOS';
+            interstitialId = '$R_ADMOB_INTERSITIAL_IOS';
           }
           
           this.admob.interstitial.config({

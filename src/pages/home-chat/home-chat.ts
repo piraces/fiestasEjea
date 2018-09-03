@@ -63,9 +63,9 @@ export class HomeChatPage {
     this.offStatus = true;
     let adId;
     if(this.platform.is('android')) {
-      adId = '$ADMOB_BANNER_ANDROID';
+      adId = '$R_ADMOB_BANNER_ANDROID';
     } else if (this.platform.is('ios')) {
-      adId = '$ADMOB_BANNER_IOS';
+      adId = '$R_ADMOB_BANNER_IOS';
     }
       this.admob.banner.config({
         id: adId,
